@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffb52e">
+<title>Ayo Kenali Lambang Pancasila! — Kelas II</title>
+<style>
+:root{
+  --yellow:#ffd93d;--pale:#fff3b0;--orange:#ff9f1c;--deep:#e8590c;
+  --brown:#713b16;--white:#fff;--green:#237a35;--green-bg:#d9f8df;
+  --red:#b42323;--red-bg:#ffe0e0;--blue:#2364aa;--shadow:#b94a08;
+  --focus:#172554;--radius:24px;box-sizing:border-box;color-scheme:light
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;min-height:100vh;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--brown);
+ background:linear-gradient(155deg,#fff3b0 0%,#ffd93d 52%,#ff9f1c 100%);background-attachment:fixed;overflow-x:hidden}
+button,input,textarea{font:inherit}
+button{touch-action:manipulation}
+.bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.bg span{position:absolute;bottom:-60px;font-size:28px;opacity:.3;animation:float-up linear infinite}
+@keyframes float-up{to{transform:translateY(-115vh) rotate(25deg)}}
+main{position:relative;z-index:1;width:min(100%,800px);margin:auto;padding:16px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.pill{background:#fff;border:3px solid var(--orange);border-radius:99px;padding:5px 12px;font-weight:800;font-size:14px;white-space:nowrap}
+.bar{height:15px;flex:1;background:#fff;border:3px solid #fff;border-radius:99px;overflow:hidden}
+.bar-fill{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--deep));transition:width .35s}
+.card{background:#fff;border:5px solid var(--orange);border-radius:var(--radius);padding:22px 18px;box-shadow:0 8px 0 var(--shadow);text-align:center;animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.97);opacity:.6}to{transform:scale(1);opacity:1}}
+h1{font-size:clamp(28px,7vw,44px);margin:6px 0;color:var(--deep);line-height:1.12}
+h2{font-size:clamp(22px,5vw,30px);margin:4px 0 10px;color:var(--deep)}
+p{font-size:clamp(17px,4vw,20px);line-height:1.5;margin:9px 0}
+.big{font-size:clamp(70px,20vw,110px);line-height:1.1;display:inline-block}
+.float{animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-9px)}}
+.btn{display:inline-block;font-size:clamp(17px,4vw,20px);font-weight:800;color:#fff;background:linear-gradient(#ffad32,var(--deep));border:0;border-radius:99px;padding:12px 24px;margin:10px 4px 0;cursor:pointer;box-shadow:0 5px 0 #a33d05}
+.btn.alt{background:linear-gradient(#ffe36a,#eab000);color:#53300b;box-shadow:0 5px 0 #a77900}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #a33d05}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+.btn:disabled,.choice:disabled,.symbol:disabled{opacity:.65;cursor:not-allowed}
+.goal{list-style:none;padding:0;text-align:left;max-width:560px;margin:12px auto}
+.goal li{background:var(--pale);border-radius:17px;padding:12px;margin:10px 0;font-size:clamp(17px,4vw,20px);display:flex;gap:10px;align-items:center}
+.number{background:var(--deep);color:#fff;border-radius:50%;min-width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+.sila{background:var(--pale);border-radius:18px;padding:13px;margin-top:12px;font-size:clamp(16px,4vw,19px);line-height:1.45}
+.sila b{color:var(--deep)}
+.row{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;font-size:34px}
+.options{display:grid;gap:11px;margin-top:15px}
+.choice{font-size:clamp(16px,4vw,20px);font-weight:700;color:var(--brown);background:var(--pale);border:3px solid var(--orange);border-radius:18px;padding:13px;cursor:pointer;text-align:center}
+.choice:hover:not(:disabled){transform:translateY(-1px)}
+.choice.correct{background:var(--green-bg);border-color:var(--green)}
+.choice.wrong{background:var(--red-bg);border-color:var(--red)}
+.feedback{min-height:32px;font-size:clamp(17px,4.5vw,21px);font-weight:800;margin-top:12px}
+.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}
+.slots,.pool{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:13px 0}
+.slot{border:3px dashed var(--orange);border-radius:14px;min-height:100px;padding:5px 2px;font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--pale);overflow-wrap:anywhere}
+.slot.filled{border-style:solid;background:var(--green-bg);border-color:var(--green)}
+.slot em{font-style:normal;font-size:clamp(25px,7vw,40px)}
+.slot small{font-weight:700;font-size:clamp(9px,2.3vw,12px);line-height:1.15}
+.symbol{font-size:clamp(27px,8vw,46px);background:#fff;border:3px solid var(--orange);border-radius:16px;padding:10px 0;cursor:pointer;min-width:0}
+.symbol.wrong{border-color:var(--red);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.stars{font-size:44px;letter-spacing:3px}
+.moods{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}
+.moods .choice{font-size:32px;padding:8px 15px;min-width:65px}
+.moods .choice.selected{background:var(--yellow);transform:scale(1.06)}
+.field{display:block;text-align:left;max-width:560px;margin:14px auto}
+.field label{display:block;font-weight:800;margin-bottom:6px}
+.field input,.field textarea{width:100%;border:3px solid var(--orange);border-radius:14px;padding:12px;background:#fffdf3;color:var(--brown);font-size:17px}
+.field textarea{min-height:76px;resize:vertical}
+.small{font-size:14px;color:#654321}
+.result-list{text-align:left;max-width:560px;margin:12px auto;padding:0;list-style:none}
+.result-list li{padding:8px 10px;background:#fff7d6;border-radius:10px;margin:6px 0}
+[hidden]{display:none!important}
+@media(max-width:420px){main{padding:12px}.card{padding:19px 12px}.slots,.pool{gap:4px}.slot{min-height:86px}.symbol{padding:9px 0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg" aria-hidden="true"></div>
+<main>
+  <div class="top" id="top" hidden>
+    <span class="pill" id="progressText">🦅 0/6</span>
+    <div class="bar" role="progressbar" aria-label="Kemajuan pembelajaran" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="progressBar"><i class="bar-fill" id="progressFill"></i></div>
+  </div>
+  <div id="app" aria-live="polite" aria-atomic="true"></div>
+</main>
+<script>
+"use strict";
+
+const SYMBOLS = [
+  {n:1,e:"⭐",name:"Bintang",sila:"Ketuhanan Yang Maha Esa",desc:"Bintang bersinar terang. Simbol ini mengingatkan kita untuk percaya dan taat kepada Tuhan."},
+  {n:2,e:"⛓️",name:"Rantai",sila:"Kemanusiaan yang Adil dan Beradab",desc:"Rantai terdiri dari mata rantai yang saling terhubung. Kita harus saling menyayangi dan menolong sesama."},
+  {n:3,e:"🌳",name:"Pohon beringin",sila:"Persatuan Indonesia",desc:"Pohon beringin rindang dan kuat. Kita bersatu walau berbeda-beda."},
+  {n:4,e:"🐂",name:"Kepala banteng",sila:"Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan",desc:"Banteng suka berkumpul. Kita bermusyawarah untuk mengambil keputusan bersama."},
+  {n:5,e:"🌾",name:"Padi dan kapas",sila:"Keadilan Sosial bagi Seluruh Rakyat Indonesia",desc:"Padi dan kapas melambangkan kebutuhan pangan dan sandang. Semua orang berhak hidup adil dan sejahtera."}
+];
+const QUESTIONS = [
+  ["🦅","Apa nama lambang negara Indonesia?","Garuda Pancasila",["Garuda Pancasila","Burung Merpati","Harimau Sumatra"]],
+  ["⭐","Simbol sila ke-1 adalah…","Bintang",["Bintang","Rantai","Padi dan kapas"]],
+  ["⛓️","Simbol sila ke-2 adalah…","Rantai",["Pohon beringin","Rantai","Kepala banteng"]],
+  ["🌳","Simbol sila ke-3 adalah…","Pohon beringin",["Bintang","Pohon beringin","Padi dan kapas"]],
+  ["🐂","Simbol sila ke-4 adalah…","Kepala banteng",["Kepala banteng","Rantai","Bintang"]],
+  ["🌾","Simbol sila ke-5 adalah…","Padi dan kapas",["Pohon beringin","Kepala banteng","Padi dan kapas"]],
+  ["⭐","Bintang melambangkan sila…","Ketuhanan Yang Maha Esa",["Persatuan Indonesia","Ketuhanan Yang Maha Esa","Kemanusiaan yang Adil dan Beradab"]],
+  ["🌳","Sila ke-3 berbunyi…","Persatuan Indonesia",["Persatuan Indonesia","Keadilan Sosial bagi Seluruh Rakyat Indonesia","Ketuhanan Yang Maha Esa"]],
+  ["🖐️","Berapa jumlah sila dalam Pancasila?","5",["3","5","7"]],
+  ["🔢","Urutan simbol sila ke-1 sampai ke-5 yang benar adalah…","⭐ ⛓️ 🌳 🐂 🌾",["⛓️ ⭐ 🌳 🐂 🌾","⭐ ⛓️ 🌳 🐂 🌾","⭐ 🌳 ⛓️ 🌾 🐂"]]
+];
+
+const $ = id => document.getElementById(id);
+const app = $("app");
+const TOTAL_STEPS = 6;
+const FEEDBACK_CORRECT = "Hebat! Jawabanmu benar. Kamu anak yang hebat!";
+const FEEDBACK_WRONG = "Belum tepat, ya. Tidak apa-apa, ayo coba lagi!";
+let currentStep = 0;
+let studentName = "";
+let activityScore = 0;
+let activityTotal = 0;
+let activityMistakes = 0;
+let quizResult = null;
+let selectedMood = "";
+
+function shuffle(array) {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[ch]);
+}
+function button(label, action, extraClass = "") {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = `btn ${extraClass}`.trim();
+  b.textContent = label;
+  b.addEventListener("click", action);
+  return b;
+}
+function render(step, markup) {
+  currentStep = step;
+  $("top").hidden = step === 0;
+  $("progressText").textContent = `🦅 ${step}/${TOTAL_STEPS}`;
+  $("progressFill").style.width = `${(step / TOTAL_STEPS) * 100}%`;
+  $("progressBar").setAttribute("aria-valuenow", String(step));
+  app.innerHTML = `<section class="card">${markup}</section>`;
+  window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  const heading = app.querySelector("h1,h2");
+  if (heading) {
+    heading.tabIndex = -1;
+    requestAnimationFrame(() => heading.focus({preventScroll:true}));
+  }
+}
+function addButtons(container, ...buttons) {
+  buttons.filter(Boolean).forEach(b => container.appendChild(b));
+}
+function makeBg() {
+  const symbols = ["⭐","🌟","🌾","🌳","☀️"];
+  for (let i=0;i<14;i++) {
+    const s=document.createElement("span");
+    s.textContent=symbols[i%symbols.length];
+    s.style.left=`${(i*7.3)%100}%`;
+    s.style.animationDuration=`${9+(i%6)*2}s`;
+    s.style.animationDelay=`${-i*1.3}s`;
+    $("bg").appendChild(s);
+  }
+}
+function intro() {
+  render(0, `<div class="big float" aria-hidden="true">🦅</div>
+    <h1>Ayo Kenali Lambang Pancasila!</h1>
+    <p>Halo, teman-teman hebat! Mari berpetualang bersama Garuda Pancasila.</p>
+    <div class="field"><label for="studentName">Nama murid</label><input id="studentName" maxlength="50" autocomplete="name" placeholder="Tuliskan namamu (boleh dikosongkan)"></div>
+    <div class="sila"><b>Mata Pelajaran:</b> Pendidikan Pancasila<br><b>Kelas:</b> II (Fase A)<br><b>Materi:</b> Lambang Negara Garuda Pancasila</div>
+    <div class="row" style="margin-top:12px" aria-label="Lima simbol Pancasila">${SYMBOLS.map(x=>x.e).join(" ")}</div>`);
+  const start = button("Mulai Petualangan! 🚀", () => {
+    studentName = $("studentName").value.trim().slice(0,50);
+    objectives();
+  });
+  app.querySelector(".card").appendChild(start);
+  $("studentName").addEventListener("keydown", e => {if(e.key==="Enter") start.click();});
+}
+function objectives() {
+  render(1, `<div class="big" aria-hidden="true">🎯</div><h2>Tujuan Belajar Kita</h2>
+    <p>Setelah belajar, kamu akan bisa:</p>
+    <ul class="goal"><li><span class="number">1</span>Mengenali simbol dan sila-sila Pancasila pada lambang Garuda Pancasila.</li>
+    <li><span class="number">2</span>Mengurutkan simbol dan sila Pancasila dari sila ke-1 sampai ke-5.</li></ul>`);
+  app.querySelector(".card").appendChild(button("Siap Belajar! 💪", () => learnSymbol(0)));
+}
+function learnSymbol(index) {
+  const x=SYMBOLS[index];
+  render(2, `<h2>Kenalan dengan Garuda Pancasila</h2>
+    <p>Di dada Garuda ada <b>perisai</b> berisi lima simbol. Setiap simbol mewakili satu sila.</p>
+    <div class="big float" role="img" aria-label="${escapeHTML(x.name)}">${x.e}</div>
+    <div class="sila"><b>Sila ke-${x.n}</b><br>Simbol: <b>${escapeHTML(x.name)}</b><br>“${escapeHTML(x.sila)}”</div>
+    <p>${escapeHTML(x.desc)}</p>
+    <p class="small">Simbol ${index+1} dari 5 · ${SYMBOLS.map((_,k)=>k===index?"🟠":"⚪").join(" ")}</p>`);
+  const card=app.querySelector(".card");
+  if(index>0) card.appendChild(button("◀ Kembali",()=>learnSymbol(index-1),"alt"));
+  card.appendChild(button(index<4?"Lanjut ▶":"Ayo Bermain! 🎮",()=>index<4?learnSymbol(index+1):guessSymbols()));
+}
+function runMultipleChoice(items, label, step, onFinish) {
+  let index=0, score=0, mistakes=0, tried=false;
+  function draw() {
+    const q=items[index];
+    tried=false;
+    render(step, `<p class="pill" style="display:inline-block">${label} ${index+1} dari ${items.length}</p>
+      <div class="big float" style="font-size:${q.small?"56px":"clamp(70px,20vw,110px)"}" aria-hidden="true">${q.icon}</div>
+      <h2 style="color:var(--brown)">${escapeHTML(q.question)}</h2>
+      <div class="options">${q.options.map((option,k)=>`<button type="button" class="choice" data-index="${k}">${escapeHTML(option)}</button>`).join("")}</div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>`);
+    const choices=[...app.querySelectorAll(".choice")];
+    choices.forEach(choice=>choice.addEventListener("click",()=>{
+      if(choice.disabled) return;
+      const selected=q.options[Number(choice.dataset.index)];
+      const feedback=$("feedback");
+      if(selected===q.answer) {
+        choice.classList.add("correct");
+        if(!tried) score++;
+        feedback.className="feedback good";
+        feedback.textContent="🎉 "+FEEDBACK_CORRECT+(tried?" Poin untuk soal ini tidak bertambah karena sudah mencoba sebelumnya.":"");
+        choices.forEach(c=>c.disabled=true);
+        app.querySelector(".card").appendChild(button(index<items.length-1?"Lanjut ▶":"Selesai ✔",()=>{
+          index++;
+          if(index<items.length) draw(); else onFinish(score,items.length,mistakes);
+        }));
+      } else {
+        tried=true;mistakes++;
+        choice.classList.add("wrong");choice.disabled=true;
+        feedback.className="feedback bad";
+        feedback.textContent="💛 "+FEEDBACK_WRONG;
+      }
+    }));
+  }
+  draw();
+}
+function guessSymbols() {
+  const items=shuffle(SYMBOLS).map(x=>({
+    icon:x.e,question:"Simbol ini mewakili sila yang mana?",answer:x.sila,
+    options:shuffle([x.sila,...shuffle(SYMBOLS.filter(y=>y!==x)).slice(0,2).map(y=>y.sila)])
+  }));
+  runMultipleChoice(items,"Tebak Simbol",3,(_score,total,mistakes)=>{
+    activityScore=_score;activityTotal=total;activityMistakes=mistakes;
+    render(3,`<div class="big float" aria-hidden="true">🎊</div><h2>Bagus sekali!</h2>
+      <p>Kamu sudah berlatih mengenal simbol dan sila Pancasila.</p>
+      <p>Jawaban benar pada percobaan pertama: <b>${_score} dari ${total}</b></p>
+      <p>Sekarang, ayo kita susun urutannya!</p>`);
+    app.querySelector(".card").appendChild(button("Main Susun Urutan 🧩",orderSymbols));
+  });
+}
+function orderSymbols() {
+  let next=1,correct=0,mistakes=0;
+  const pool=shuffle(SYMBOLS);
+  render(3,`<h2>Susun Urutan Sila 🧩</h2><p>Ketuk simbol mulai dari sila ke-1 sampai sila ke-5.</p>
+    <div class="slots">${SYMBOLS.map(x=>`<div class="slot" id="slot${x.n}" aria-label="Tempat sila ke-${x.n}"><b>${x.n}</b></div>`).join("")}</div>
+    <div class="pool">${pool.map(x=>`<button type="button" class="symbol" data-number="${x.n}" aria-label="${escapeHTML(x.name)}">${x.e}</button>`).join("")}</div>
+    <div class="feedback" id="feedback" aria-live="polite">Cari sila ke-1 dulu, ya!</div>`);
+  app.querySelectorAll(".symbol").forEach(b=>b.addEventListener("click",()=>{
+    const n=Number(b.dataset.number),feedback=$("feedback");
+    if(n===next) {
+      const x=SYMBOLS[n-1],slot=$("slot"+n);
+      slot.classList.add("filled");
+      slot.innerHTML=`<em aria-hidden="true">${x.e}</em><small>${escapeHTML(x.name)}</small>`;
+      slot.setAttribute("aria-label",`Sila ke-${n}: ${x.name}`);
+      b.disabled=true;next++;correct++;
+      feedback.className="feedback good";
+      if(next>5) {
+        feedback.textContent="🎉 Hebat! Semua simbol sudah tersusun dengan benar.";
+        app.querySelector(".card").appendChild(button("Lanjut ke Kuis ▶",quizIntro));
+      } else feedback.textContent=`Benar! Sekarang cari sila ke-${next}.`;
+    } else {
+      mistakes++;b.classList.add("wrong");
+      setTimeout(()=>b.classList.remove("wrong"),350);
+      feedback.className="feedback bad";feedback.textContent="💛 "+FEEDBACK_WRONG;
+    }
+  }));
+  window.orderResult=()=>({correct,mistakes});
+}
+function quizIntro() {
+  render(4,`<div class="big float" aria-hidden="true">📝</div><h2>Waktunya Kuis!</h2>
+    <p>Ada <b>10 soal</b> pilihan ganda. Pilih jawaban yang paling tepat, ya. Semangat!</p>`);
+  app.querySelector(".card").appendChild(button("Mulai Kuis ✏️",startQuiz));
+}
+function startQuiz() {
+  const questions=QUESTIONS.map(([icon,question,answer,options])=>({
+    icon,question,answer,options:shuffle(options),small:icon==="🔢"
+  }));
+  runMultipleChoice(questions,"Soal",4,(score,total,mistakes)=>{
+    quizResult={score,total,mistakes,percent:Math.round(score/total*100)};
+    showResults();
+  });
+}
+function saveResult(record) {
+  try {
+    const key="hasilMediaLambangPancasilaV2";
+    const old=JSON.parse(localStorage.getItem(key)||"[]");
+    const records=Array.isArray(old)?old:[];
+    records.push(record);
+    localStorage.setItem(key,JSON.stringify(records.slice(-100)));
+    return true;
+  } catch(error) {
+    console.warn("Hasil tidak dapat disimpan di perangkat ini:",error);
+    return false;
+  }
+}
+function downloadCSV() {
+  let records=[];
+  try {records=JSON.parse(localStorage.getItem("hasilMediaLambangPancasilaV2")||"[]");} catch(e) {}
+  if(!records.length) {alert("Belum ada hasil yang tersimpan di perangkat ini.");return;}
+  const columns=["nama","skor","total","persentase","kesalahan","refleksi_perasaan","refleksi_simbol","refleksi_sikap","tanggal"];
+  const csv=[columns.join(","),...records.map(r=>columns.map(k=>`"${String(r[k]??"").replace(/"/g,'""')}"`).join(","))].join("\r\n");
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download="hasil-belajar-lambang-pancasila.csv";
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+function showResults() {
+  const r=quizResult;
+  const stars=r.percent>=90?3:r.percent>=60?2:1;
+  const message=r.percent>=90?"Luar biasa! Kamu sangat memahami Lambang Pancasila!":
+    r.percent>=60?"Hebat! Terus berlatih agar semakin paham!":"Terus semangat! Ayo belajar lagi bersama guru atau temanmu!";
+  render(5,`<div class="big float" aria-hidden="true">🏆</div><h2>Hasil Kuismu</h2>
+    <div class="stars" aria-label="${stars} dari 3 bintang">${"⭐".repeat(stars)}${"☆".repeat(3-stars)}</div>
+    <p style="font-size:30px;font-weight:800;color:var(--deep)">${r.score} dari ${r.total} benar</p>
+    <p>Nilai: <b>${r.percent}/100</b></p><p>${message}</p>
+    <div class="sila"><b>Ingat, ya!</b><br>${SYMBOLS.map(x=>`${x.e} Sila ${x.n}: ${escapeHTML(x.name)}`).join("<br>")}</div>
+    <p class="small">Nama: ${escapeHTML(studentName||"Belum diisi")} · Kesalahan saat kuis: ${r.mistakes}</p>`);
+  const card=app.querySelector(".card");
+  card.appendChild(button("Lanjut ke Refleksi 💭",reflection));
+  card.appendChild(button("Ulangi Kuis 🔄",startQuiz,"alt"));
+}
+function reflection() {
+  selectedMood="";
+  render(6,`<div class="big float" aria-hidden="true">💭</div><h2>Ayo Berefleksi</h2>
+    <p>Bagaimana perasaanmu belajar hari ini?</p>
+    <div class="moods">${[["😍","Senang sekali!"],["🙂","Senang"],["😐","Biasa saja"],["🤔","Masih bingung"]].map(([e,t])=>`<button type="button" class="choice" data-mood="${t}" aria-label="${t}">${e}</button>`).join("")}</div>
+    <div class="feedback" id="moodFeedback" aria-live="polite"></div>
+    <div class="field"><label for="favorite">1. Simbol sila apa yang paling kamu suka?</label><textarea id="favorite" maxlength="300" placeholder="Aku paling suka simbol ..."></textarea></div>
+    <div class="field"><label for="action">2. Bagaimana caramu bersikap baik sesuai Pancasila di rumah atau sekolah?</label><textarea id="action" maxlength="300" placeholder="Aku akan ..."></textarea></div>
+    <p>Terima kasih sudah belajar! Kamu hebat! 🇮🇩</p>`);
+  app.querySelectorAll("[data-mood]").forEach(b=>b.addEventListener("click",()=>{
+    selectedMood=b.dataset.mood;
+    app.querySelectorAll("[data-mood]").forEach(x=>x.classList.toggle("selected",x===b));
+    $("moodFeedback").textContent=selectedMood==="Masih bingung"?"Tidak apa-apa! Ayo belajar lagi bersama guru atau temanmu. 💛":"Yeay! Terus semangat belajar ya! 🌟";
+    $("moodFeedback").className="feedback good";
+  }));
+  const finish=button("Simpan Refleksi & Kembali ke Awal 🏠",()=>{
+    const record={
+      nama:studentName,skor:quizResult?.score??0,total:quizResult?.total??10,
+      persentase:quizResult?.percent??0,kesalahan:quizResult?.mistakes??0,
+      refleksi_perasaan:selectedMood,
+      refleksi_simbol:$("favorite").value.trim(),
+      refleksi_sikap:$("action").value.trim(),
+      tanggal:new Date().toLocaleString("id-ID")
+    };
+    const saved=saveResult(record);
+    render(0,`<div class="big" aria-hidden="true">🌟</div><h1>Terima Kasih!</h1>
+      <p>${saved?"Hasil belajar dan refleksimu tersimpan di perangkat ini.":"Refleksi selesai. Penyimpanan perangkat tidak tersedia, jadi hasil belum tersimpan."}</p>
+      <p class="small">Untuk mengumpulkan hasil dari beberapa perangkat, guru perlu menggunakan layanan penyimpanan daring.</p>`);
+    const card=app.querySelector(".card");
+    card.appendChild(button("Kembali ke Awal 🏠",intro));
+    card.appendChild(button("Unduh Rekap CSV 📥",downloadCSV,"alt"));
+  });
+  app.querySelector(".card").appendChild(finish);
+}
+makeBg();
+intro();
+</script>
+</body>
+</html>
